@@ -1,5 +1,5 @@
 -- HW5 Iftidar Miah
--- Ch.8 Problem 2 case statement
+-- Ch.8 Problem 2 if statement
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -23,42 +23,47 @@ begin
     
     A_proc: process(AA)     -- A1 and A2
     begin
-        case (AA) is
-            when "11"   => A <= '1';
-            when others => A <= '0';
-        end case;
+        if (AA = "11") then
+            A <= '1';
+        else
+            A <= '0';
+        end if;
     end process A_proc;
     
     B_proc: process(BB)     -- B1 or B2
     begin
-        case (BB) is
-            when "00"   => B <= '0';
-            when others => B <= '1';
-        end case;
+        if (BB = "00") then
+            B <= '0';
+        else
+            B <= '1';
+        end if;
     end process B_proc;
     
     C_proc: process(BD)     -- B2 and (not D1) = B2 and D_inv
     begin
-        case (BD) is
-            when "1"    => C <= '1';
-            when others => C <= '0';
-        end case;
+        if (BD = "11") then
+            C <= '1';
+        else
+            C <= '0';
+        end if;
     end process C_proc;
     
     D_proc: process(D_1)     -- not D1
     begin
-        case (D_1) is
-            when '1'    => D_inv <= '0';
-            when others => D_inv <= '1';
-        end case;
+        if (D_1 = '1') then
+            D_inv <= '0';
+        else
+            D_inv <= '1';
+        end if;
     end process D_proc;
     
     E_proc: process(ABC)    -- A or B or C
     begin
-        case (ABC) is
-            when "000"  => E_out <= '0';
-            when others => E_out <= '1';
-        end case;   
+        if (ABC = "000") then
+            E_out <= '0';
+        else
+            E_out <= '1';
+        end if;
     end process E_proc;
 
 end problem2_arch;
