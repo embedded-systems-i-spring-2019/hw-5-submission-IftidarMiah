@@ -18,12 +18,15 @@ begin
 
     BB  <= (B_1 & B_2);
     BD  <= (B_2 & D_inv);
+    ABC <= (A & B & C);
     
     -- concurrent assignment, A = A1 and A2
     A <= (A_1 AND A_2);
     
     -- conditional assignment, B = B1 or B2
-    B   <=  '1' when (BB = "01" OR BB = "10" or BB = "11") else
+    B   <=  '1' when (BB = "01") else
+            '1' when (BB = "10") else
+            '1' when (BB = "11") else
             '0';
             
     -- selected assignment, D_inv = not D1
@@ -34,11 +37,20 @@ begin
                     
     -- conditional assignment, C = B2 and D_inv
     C   <=  '1' when (BD = "11") else
+            '0' when (BD = "01") else
+            '0' when (BD = "10") else
+            '0' when (BD = "00") else
             '0';
             
     -- selected assignment, E_out = A or B or C
-    with (A OR B OR C) select
-        E_out   <=  '1' when '1',
+    with (ABC) select
+        E_out   <=  '1' when "001",
+                    '1' when "010",
+                    '1' when "011",
+                    '1' when "100",
+                    '1' when "101",
+                    '1' when "110",
+                    '1' when "111",
                     '0' when others;
     
 end problem3_arch;
